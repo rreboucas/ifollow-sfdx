@@ -1,0 +1,18 @@
+<aura:component >
+    <!-- Attribute for the card's expense record -->
+    <aura:attribute name="followedrecord" type="IFollowObject" />
+    <aura:attribute name="class" type="String" default=""/>
+    <ltng:require styles="/resource/roreblciflw3__btstrp12" />
+    <!-- Initialization event handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<div class="ifollow" onclick="{!c.linkToRecord}">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-2"><div class="divlogo"><div class="{!v.class}"><img class="imgComp" src="{!v.followedrecord.iconUrl}"/></div></div></div>
+                <div class="col-xs-10"><span class="recName">{!v.followedrecord.recordName}</span>
+</div>
+            </div>
+        </div>
+   </div>
+    
+</aura:component>

@@ -1,0 +1,56 @@
+<aura:component controller="IFollowObject" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global">
+    <!-- Attributes for Records Followed List     -->
+    <aura:attribute name="lstFlwRecords" type="IFollowObject"/>
+    <aura:attribute name="lstObjects" type="String[]" default="Filter By"/>
+    <aura:attribute name="limitRows" type="Integer" default="8" access="global"/>
+    <aura:attribute name="validRange" type="Boolean" default="true"/>
+    <aura:attribute name="componentName" type="String" default="IFollow" access="global"/>
+    <aura:attribute name="selectedObj" type="String" default="Most Recent"/>
+    <ltng:require styles="/resource/roreblciflw3__btstrp12" />
+    <!-- Initialization event handler registration -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <div class="ifollow slds">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-10"><div class="cmpTitle">{!v.componentName}</div></div>
+                    <div class="col-xs-6 col-sm-2">
+                        <ui:inputSelect class="selectList" aura:id="lstobjects" change="{!c.onSelectChange}">
+                        <ui:inputSelectOption text="Most Recent" label="Most Recent"/>
+                        <aura:iteration items="{!v.lstObjects}" var="obj" >                 
+                            <ui:inputSelectOption text="{!obj}" label="{!obj}" class="slds-select"/>
+                        </aura:iteration>
+                        </ui:inputSelect>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div>
+         <ul>
+         <aura:if isTrue="{!v.validRange}">
+                <aura:iteration items="{!v.lstFlwRecords}" var="rec">
+                <li>
+                    <c:IFollowRecordCard followedrecord="{!rec}"/>
+                </li>
+            </aura:iteration>
+            <aura:set attribute="else">
+                    <li>
+                    <div class="validation">    
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                            <div class="col-xs-10 col-sm-11">Please enter a number between 1 and 12 in the <b>Number of Records to Display</b> attribute</div>           
+                        </div>    
+                    </div>    
+                    </div>    
+                        
+                        
+                    </li>
+                </aura:set>
+        </aura:if>
+    </ul>  
+        </div>
+        </div>
+        </div>
+</aura:component>
